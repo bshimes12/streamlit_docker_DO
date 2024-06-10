@@ -1,0 +1,25 @@
+
+#services:
+#     web:
+#       build: .
+#       image: bshwel617/streamlit-app:latest
+#       ports:
+#        - 8080:8501
+#       volumes:
+#         - .:/app
+#       environment:
+#         - STREAMLIT_ENV=development
+        #- ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+
+
+services:
+  web:
+    build: .
+    image: bshwel617/streamlit-app:latest
+    ports:
+      - "8080:8051"  # Map host port 8080 to container port 8080
+    #command: ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.port=8080"]
+    volumes:
+      - .:/app
+    environment:
+      - STREAMLIT_ENV=development

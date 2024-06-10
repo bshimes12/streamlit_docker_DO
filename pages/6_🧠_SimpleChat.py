@@ -1,0 +1,41 @@
+import streamlit as st
+import requests
+import hmac
+
+def check_password():
+    """Returns `True` if the user had the correct password."""
+
+    def password_entered():
+        """Checks whether a password entered by the user is correct."""
+        if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]  # Don't store the password.
+        else:
+            st.session_state["password_correct"] = False
+
+    # Return True if the password is validated.
+    if st.session_state.get("password_correct", False):
+        return True
+
+
+
+API_URL = "https://agents.ideaatoms.com/api/v1/prediction/29777652-d56e-4a58-af53-609d66780e16"
+
+def query(payload):
+    headers = {"Authorization": "Bearer ioOxThzoUOISZGIe1MDKyz/ohO1V6KPjNVeW1tDa8HQ="}
+    response = requests.post(API_URL, json=payload, headers=headers)
+
+    return response.json()
+
+st.title('Simple Chat App with the newest open OpenAI model 4.o')
+
+user_input = st.text_input("Type your message here...")
+button_clicked = st.button('Send')
+
+if button_clicked and user_input:
+    output = query({
+        "question": user_input,
+    })
+    st.write(output['text'])
+else:
+    st.write("Welcome to the Simple Chat App. Please type your message and click 'Send'. It's a very basic app, don't expect too much!")
