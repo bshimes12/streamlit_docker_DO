@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import hmac
+import json
 
 def check_password():
     """Returns `True` if the user had the correct password."""
@@ -22,7 +23,29 @@ headers = {"Authorization": "Bearer ioOxThzoUOISZGIe1MDKyz/ohO1V6KPjNVeW1tDa8HQ=
 
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
+    print("Status code:", response.status_code)
+    print("Response text:", response.text)
     return response.json()
+
+def json_to_markdown(data, indent=0):
+    markdown = ""
+    indent_str = "  " * indent
+
+    if isinstance(data, dict):
+        for key, value in data.items():
+            markdown += f"{indent_str}**{key}**:\n"
+            if isinstance(value, (dict, list)):
+                markdown += json_to_markdown(value, indent + 1)
+            else:
+                markdown += f"{indent_str}- {value}\n"
+    elif isinstance(data, list):
+        for i, item in enumerate(data):
+            markdown += f"{indent_str}- Item {i+1}:\n"
+            markdown += json_to_markdown(item, indent + 1)
+    else:
+        markdown += f"{indent_str}- {data}\n"
+
+    return markdown
 
 st.title('Researcher Toolkit')
 
@@ -33,4 +56,5 @@ if button_clicked and user_input:
     output = query({
         "question": user_input,
     })
-    st.write(output)
+    markdown = json_to_markdown(output)
+    st.markdown(markdown)

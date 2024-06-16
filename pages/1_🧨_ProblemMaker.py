@@ -42,7 +42,7 @@ st.title("🧨 Problem Maker")
     # Define the prompt template
 prompt_template = "Complete the problem statement elements below based on this {problem}. The detailed problem: \n###Introduction: Briefly describes the problem, setting the context for a deeper understanding of the issue at hand.\n###Background: Provides the historical context, the circumstances that have led to the problem, and any previous attempts to solve the issue. This section may include data, research findings, or a summary of relevant events.\n###Problem Description: Clearly and specifically describes the problem, including who it affects and in what ways. It should detail the symptoms of the problem and its impact on stakeholder\n###Scope: Outlines the boundaries of the problem, including what is and isn't included within the scope of the issue. This helps to focus the problem statement on a specific area of concern.\n\n ###Factors Involed: Factors Influencing the Problem: Identifies the internal and external factors contributing to the problem. This can include organizational, environmental, societal, technological, or individual factors that affect the issue."
 multi_markdown = """      
-        :blue-background[The better you articulate your problem, the better the problem solver will do. Edit this freely after you get a boilerplate response.] 
+        :blue-background[The better you articulate your problem, the better the problem solver will do. Edit this freely after you get a boilerplate response.]    
         **Introduction:** Briefly describes the problem, setting the context for a deeper understanding of the issue at hand.  
         **Background:** Provides the historical context, the circumstances that have led to the problem, and any previous attempts to solve the issue. This section may include data, research findings, or a summary of relevant events.  
         **Problem Description:** Clearly and specifically describes the problem, including who it affects and in what ways. It should detail the symptoms of the problem and its impact on stakeholder.  
@@ -52,7 +52,7 @@ multi_markdown = """
 st.markdown(multi_markdown)
 def generate_response(problem):
     prompt = PromptTemplate.from_template(prompt_template)
-    model = ChatAnthropic(model="claude-2.1")
+    model = ChatAnthropic(model="claude-3-sonnet-20240229")
     chain = prompt | model
     response= chain.invoke({"problem": problem})
     return response.content
