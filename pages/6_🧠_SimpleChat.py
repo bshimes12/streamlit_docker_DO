@@ -17,6 +17,18 @@ def check_password():
     if st.session_state.get("password_correct", False):
         return True
 
+    # Show input for password.
+    st.text_input(
+        "Password", type="password", on_change=password_entered, key="password"
+    )
+    if "password_correct" in st.session_state:
+        st.error("😕 Password incorrect")
+    return False
+
+
+if not check_password():
+    st.stop() 
+
 
 
 API_URL = "https://agents.ideaatoms.com/api/v1/prediction/29777652-d56e-4a58-af53-609d66780e16"

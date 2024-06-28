@@ -49,6 +49,7 @@ def main():
  
         # Dropdown to select the model
     model_options = {
+        "Claude 3.5 Sonnet - Latest and Greatest": "claude-3-5-sonnet-20240620",
         "Claude 3 Opus - Advanced/Slower/Expensive": "claude-3-opus-20240229",
         "Claude 3 Haiku - Good/Fast/Affordable": "claude-3-haiku-20240307",
         "Claude 3 Sonnet - Basic/Cheap/Affordable": "claude-3-sonnet-20240229",
@@ -64,7 +65,7 @@ def main():
         st.stop()
 
     solutions_template = """
-    You are a analytical thinker with experience in solving problems. You offer reasonable but creative solutions. You take your time and think outside the box for unique, mutually beneficial solutions.
+    You are a careful, analytical thinker with experience in solving problems. You offer advice that is creative and achievable. Think step by step and make helpful solutions.
     Generate {num_solutions} distinct solutions for <problem>{problem}</problem>. 
     Consider factors like {factors}. 
     Solutions:

@@ -52,7 +52,7 @@ multi_markdown = """
 st.markdown(multi_markdown)
 def generate_response(problem):
     prompt = PromptTemplate.from_template(prompt_template)
-    model = ChatAnthropic(model="claude-3-sonnet-20240229")
+    model = ChatAnthropic(model="claude-3-5-sonnet-20240620")
     chain = prompt | model
     response= chain.invoke({"problem": problem})
     return response.content

@@ -99,7 +99,7 @@ def init_conversationchain():
                     'top_k': TOP_K,
                     'max_tokens_to_sample': MAX_TOKENS}
 
-    llm = ChatAnthropic(model="claude-3-opus-20240229", 
+    llm = ChatAnthropic(model="claude-3-5-sonnet-20240620", 
         temperature=TEMPERATURE,
         top_p=TOP_P,
         top_k=TOP_K,
