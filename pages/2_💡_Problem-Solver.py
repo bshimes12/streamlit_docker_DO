@@ -44,7 +44,7 @@ st.title("💡 Problem Solver")
 def main():
     
 # Sidebar input for API key
-    #api_key = st.sidebar.text_input("Enter your Anthropic API key:", type="password", value="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")
+    #api_key = st.sidebar.text_input("Enter your Anthropic API key:", type="password", value="")
 
  
         # Dropdown to select the model

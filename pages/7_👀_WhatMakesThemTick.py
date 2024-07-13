@@ -70,3 +70,4 @@ if button_clicked and user_input:
     })
     markdown = json_to_markdown(output)
     st.markdown(markdown)
+    st.json(output)
