@@ -33,26 +33,21 @@ def check_password():
         st.error("😕 Password incorrect")
     return False
 
-
-if not check_password():
-    st.stop()  # Do not continue if check_password is not True.
-
-
-
-
+# Uncomment the following lines to enable password protection
+# if not check_password():
+#     st.stop()  # Do not continue if check_password is not True.
 
 # Initialize Prodia client
 client = Prodia(os.getenv("PRODIA_API_KEY"))
-# User input for the negative prompt
 
-def generate_image(prompt, model,negative_prompt):
+def generate_image(prompt, model, negative_prompt):
     job = client.sd.generate(prompt=prompt, model=model, negative_prompt=negative_prompt)
     result = client.wait(job)
     return result.image_url
 
 def main():
-    st.title("Crazy Image Generator")
-    st.markdown("This uses Propia model family of image generators.   ")
+    st.title("Multi-Model Image Generator")
+    st.markdown("This uses the Prodia model family of image generators.")
 
     # User input for the prompt
     user_prompt = st.text_input("Enter your prompt:", "Regal golden retriever sitting on his throne wearing a crown.")
@@ -125,15 +120,18 @@ def main():
         "timeless-1.0.ckpt [7c4971d4]",
         "toonyou_beta6.safetensors [980f6b15]"
     ]
-    model_selection = st.selectbox("Select a model:", models)
+    selected_models = st.multiselect("Select models:", models, default=[models[0]])
 
-    if st.button("Generate Image"):
-        with st.spinner('Generating...'):
-            image_url = generate_image(user_prompt, model_selection,negative_prompt)
-            response = requests.get(image_url)
-            image = Image.open(BytesIO(response.content))
-            st.image(image, caption="Generated Image")
+    if st.button("Generate Images"):
+        if not selected_models:
+            st.warning("Please select at least one model.")
+        else:
+            for model in selected_models:
+                with st.spinner(f'Generating image using {model}...'):
+                    image_url = generate_image(user_prompt, model, negative_prompt)
+                    response = requests.get(image_url)
+                    image = Image.open(BytesIO(response.content))
+                    st.image(image, caption=f"Generated Image using {model}")
 
 if __name__ == "__main__":
     main()
-

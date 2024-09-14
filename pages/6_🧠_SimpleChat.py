@@ -26,7 +26,7 @@ def check_password():
     return False
 
 
-if not check_password():
+#if not check_password():
     st.stop() 
 
 
@@ -39,7 +39,7 @@ def query(payload):
 
     return response.json()
 
-st.title('Simple Chat App with the newest open OpenAI model 4.o')
+st.title('Simple Chat App with the OpenAI model 4.o')
 
 user_input = st.text_input("Type your message here...")
 button_clicked = st.button('Send')
@@ -50,4 +50,4 @@ if button_clicked and user_input:
     })
     st.write(output['text'])
 else:
-    st.write("Welcome to the Simple Chat App. Please type your message and click 'Send'. It's a very basic app, don't expect too much!")
+    st.write("Welcome to the Simple Chat App. Please type your message and click 'Send'. It's a very basic app, don't expect too much! What it is demonstrating is calling a backend API to another service that proxies the Open AI model.")

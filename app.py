@@ -26,7 +26,7 @@ def check_password():
     return False
 
 
-if not check_password():
+#if not check_password():
     st.stop()  # Do not continue if check_password is not True.
 
 
@@ -36,16 +36,15 @@ st.set_page_config(
     page_icon="👋",
 )
 
-st.write("# Welcome to my Streamlit AI Apps! 👋")
+st.write("# Welcome! 👋")
 
 st.sidebar.success("Select a demo above.")
 
 st.markdown(
     """
-    **👈 Select a demo from the sidebar** to see some examples!    
-    **Problem Maker** will take a short problem description and turn it into a thorough problem statement.  
-    Copy or edit that problem statement and problem factors and use them in the **Problem Solver**.  
-    Personas is just for fun.  
+    **👈 Select a demo from the sidebar**
+
+    🤖 **Or visit** [The Chatbot section](https://apps.ideaatoms.com/bots)    
 
 """
 )
